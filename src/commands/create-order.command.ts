@@ -7,6 +7,7 @@ export namespace CreateOrderCommand {
         ip: z.string(),
         amount: z.number(),
         paymentId: z.string(),
+        currency: z.string().optional(),
         phone: z.string().optional(),
         successUrl: z.string().optional(),
         failUrl: z.string().optional(),

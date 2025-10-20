@@ -55,8 +55,8 @@ export class Freekassa {
         return res.json() as Promise<T>;
     }
 
-    public signForm(amount: number, paymentId: string): string {
-        const str = `${this.shopId}:${amount}:${this.secretWord1}:${this.currency}:${paymentId}`;
+    public signForm(amount: number, paymentId: string, currency?: string): string {
+        const str = `${this.shopId}:${amount}:${this.secretWord1}:${currency ?? this.currency}:${paymentId}`;
         return crypto.createHash('md5').update(str).digest('hex');
     }
 
@@ -68,10 +68,10 @@ export class Freekassa {
         const q: Record<string, string> = {
             m: String(this.shopId),
             oa: String(params.amount),
-            currency: this.currency,
+            currency: params.currency ?? this.currency,
             o: params.paymentId,
             s,
-            lang: this.lang,
+            lang: params.lang ?? this.lang,
         };
 
         if (params.methodId) {
@@ -153,7 +153,7 @@ export class Freekassa {
             email: dtoParsed.email,
             ip: dtoParsed.ip,
             amount: dtoParsed.amount,
-            currency: this.currency,
+            currency: dtoParsed.currency ?? this.currency,
             paymentId: dtoParsed.paymentId,
         };
 
@@ -212,7 +212,7 @@ export class Freekassa {
             i: options.methodId,
             account: options.account,
             amount: options.amount,
-            currency: this.currency,
+            currency: options.currency ?? this.currency,
             paymentId: options.paymentId,
         };
         return this.request(API.CREATE_WITHDRAWAL, body);

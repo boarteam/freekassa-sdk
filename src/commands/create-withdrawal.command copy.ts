@@ -5,6 +5,7 @@ export namespace CreateWithdrawalCommand {
         methodId: z.number(),
         account: z.string(),
         amount: z.number(),
+        currency: z.string().optional(),
         paymentId: z.string(),
     });
 
