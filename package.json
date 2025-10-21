@@ -1,6 +1,6 @@
 {
   "name": "@boarteam/freekassa-sdk",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "freekassa sdk",
   "scripts": {
     "test": "ts-node test.ts",
@@ -31,5 +31,8 @@
   "types": "build/backend/index.d.ts",
   "files": [
     "build/**/*"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
