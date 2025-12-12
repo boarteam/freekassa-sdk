@@ -15,6 +15,7 @@ import {
 } from './commands';
 import { API } from './api/api';
 import { ApiRequestBody } from './interfaces';
+import { FreekassaException } from './freekassa.exception';
 
 export class Freekassa {
     private readonly key: CtrConfigCommand.ICtrConfig['key'];
@@ -50,7 +51,7 @@ export class Freekassa {
 
         if (!res.ok) {
             const text = await res.text();
-            throw new Error(`Freekassa API error ${res.status}: ${text}`);
+            throw new FreekassaException(`Freekassa API error ${res.status}: ${text}`, text);
         }
         return res.json() as Promise<T>;
     }
